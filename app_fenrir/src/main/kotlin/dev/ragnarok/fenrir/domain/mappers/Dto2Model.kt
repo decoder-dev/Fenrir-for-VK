@@ -38,6 +38,8 @@ import dev.ragnarok.fenrir.api.model.VKApiPhotoTags
 import dev.ragnarok.fenrir.api.model.VKApiPoll
 import dev.ragnarok.fenrir.api.model.VKApiPost
 import dev.ragnarok.fenrir.api.model.VKApiPrivacy
+import dev.ragnarok.fenrir.api.model.VKApiReaction
+import dev.ragnarok.fenrir.api.model.VKApiReactionAsset
 import dev.ragnarok.fenrir.api.model.VKApiShortLink
 import dev.ragnarok.fenrir.api.model.VKApiSticker
 import dev.ragnarok.fenrir.api.model.VKApiStory
@@ -102,6 +104,8 @@ import dev.ragnarok.fenrir.model.Poll
 import dev.ragnarok.fenrir.model.Post
 import dev.ragnarok.fenrir.model.PostSource
 import dev.ragnarok.fenrir.model.Privacy
+import dev.ragnarok.fenrir.model.Reaction
+import dev.ragnarok.fenrir.model.ReactionAsset
 import dev.ragnarok.fenrir.model.ShortLink
 import dev.ragnarok.fenrir.model.SimplePrivacy
 import dev.ragnarok.fenrir.model.Sticker
@@ -148,11 +152,12 @@ object Dto2Model {
             .setTitle(chat.title)
     }
 
-    fun transform(narrative: VKApiNarratives): Narratives {
+    fun transformNarrative(narrative: VKApiNarratives): Narratives {
         return Narratives(narrative.id, narrative.owner_id)
             .setTitle(narrative.title)
             .setCover(narrative.cover)
             .setStory_ids(narrative.story_ids)
+            .setAccessKey(narrative.access_key)
     }
 
     fun transformOwner(owner: VKApiOwner?): Owner? {
@@ -291,6 +296,11 @@ object Dto2Model {
         return page
     }
 
+    fun transformReactionAsset(dto: VKApiReactionAsset): ReactionAsset {
+        return ReactionAsset().setReactionId(dto.reaction_id)
+            .setBigAnimation(dto.big_animation).setSmallAnimation(dto.small_animation)
+            .setStatic(dto.static)
+    }
 
     fun transformUser(user: VKApiUser): User {
         return User(user.id)
@@ -343,6 +353,7 @@ object Dto2Model {
         message.keyboard = update.keyboard
         message.payload = update.payload
         message.update_time = update.edit_time
+        message.conversation_message_id = update.conversationMessageId
         return message
     }
 
@@ -529,6 +540,15 @@ object Dto2Model {
         } else null
     }
 
+    fun transform(dto: VKApiReaction): Reaction {
+        return Reaction().setReactionId(dto.reaction_id).setCount(dto.count)
+    }
+
+    fun transform(dto: VKApiReactionAsset): ReactionAsset {
+        return ReactionAsset().setReactionId(dto.reaction_id).setBigAnimation(dto.big_animation)
+            .setSmallAnimation(dto.small_animation)
+            .setStatic(dto.static)
+    }
 
     fun transform(aid: Long, message: VKApiMessage, owners: IOwnersBundle): Message {
         val encrypted = analizeMessageBody(message.body) == MessageType.CRYPTED
@@ -557,12 +577,20 @@ object Dto2Model {
             .setSender(owners.getById(message.from_id))
             .setPayload(message.payload)
             .setKeyboard(transformKeyboard(message.keyboard))
+            .setUpdateTime(message.update_time)
+            .setConversationMessageId(message.conversation_message_id)
+            .setReactionId(message.reaction_id)
         if (message.action_mid != 0L) {
             appMessage.setActionUser(owners.getById(message.action_mid))
         }
         if (message.attachments != null && message.attachments?.nonEmpty() == true) {
             message.attachments?.let {
                 appMessage.setAttachments(buildAttachments(it, owners))
+            }
+        }
+        message.reactions.nonNullNoEmpty {
+            for (react in it) {
+                appMessage.prepareReactions(it.size).add(transform(react))
             }
         }
         message.fwd_messages.nonNullNoEmpty {
@@ -1239,6 +1267,9 @@ object Dto2Model {
 
                 VKApiAttachment.TYPE_STORY -> attachments.prepareStories()
                     .add(transformStory(attachment as VKApiStory, owners))
+
+                VKApiAttachment.TYPE_NARRATIVE -> attachments.prepareNarratives()
+                    .add(transformNarrative(attachment as VKApiNarratives))
 
                 VKApiAttachment.TYPE_ALBUM -> attachments.preparePhotoAlbums().add(
                     transform(attachment as VKApiPhotoAlbum)
