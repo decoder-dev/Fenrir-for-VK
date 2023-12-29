@@ -645,6 +645,14 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     menus.add(
                         OptionRequest(
                             0,
+                            getString(R.string.set_online),
+                            R.drawable.ic_eye_white_vector,
+                            true
+                        )
+                    )
+                    menus.add(
+                        OptionRequest(
+                            1,
                             getString(R.string.set_offline),
                             R.drawable.offline,
                             true
@@ -652,7 +660,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     )
                     menus.add(
                         OptionRequest(
-                            1,
+                            2,
                             getString(R.string.open_clipboard_url),
                             R.drawable.web,
                             false
@@ -660,7 +668,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     )
                     menus.add(
                         OptionRequest(
-                            2,
+                            3,
                             getString(R.string.stories),
                             R.drawable.story_outline,
                             true
@@ -669,7 +677,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     if (Utils.isOfficialVKCurrent) {
                         menus.add(
                             OptionRequest(
-                                3,
+                                4,
                                 getString(R.string.clips),
                                 R.drawable.clip_outline,
                                 true
@@ -678,7 +686,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     }
                     menus.add(
                         OptionRequest(
-                            4,
+                            5,
                             getString(R.string.settings),
                             R.drawable.preferences,
                             true
@@ -686,7 +694,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                     )
                     menus.add(
                         OptionRequest(
-                            5,
+                            6,
                             getString(R.string.scan_qr),
                             R.drawable.qr_code,
                             false
@@ -699,6 +707,18 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                         when (option.id) {
                             0 -> {
                                 mCompositeDisposable.add(InteractorFactory.createAccountInteractor()
+                                    .setOnline(
+                                        Settings.get().accounts().current
+                                    )
+                                    .fromIOToMain()
+                                    .subscribe({ onSetOnline(it) }) {
+                                        onSetOnline(
+                                            false
+                                        )
+                                    })
+                            }
+                            1 -> {
+                                mCompositeDisposable.add(InteractorFactory.createAccountInteractor()
                                     .setOffline(
                                         Settings.get().accounts().current
                                     )
@@ -710,7 +730,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                                     })
                             }
 
-                            1 -> {
+                            2 -> {
                                 val clipBoard =
                                     getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
                                 if (clipBoard != null && clipBoard.primaryClip != null && (clipBoard.primaryClip?.itemCount
@@ -728,7 +748,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                                 }
                             }
 
-                            2 -> {
+                            3 -> {
                                 mCompositeDisposable.add(InteractorFactory.createStoriesInteractor()
                                     .getStories(
                                         Settings.get().accounts().current,
@@ -753,17 +773,17 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                                     })
                             }
 
-                            3 -> {
+                            4 -> {
                                 PlaceFactory.getShortVideoPlace(mAccountId, null)
                                     .tryOpenWith(this@MainActivity)
                             }
 
-                            4 -> {
+                            5 -> {
                                 PlaceFactory.getPreferencesPlace(mAccountId)
                                     .tryOpenWith(this@MainActivity)
                             }
 
-                            5 -> {
+                            6 -> {
                                 val intent =
                                     Intent(
                                         this@MainActivity,
@@ -794,6 +814,12 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
         if (success) createCustomToast(this).showToast(R.string.succ_offline) else createCustomToast(
             this
         ).showToastError(R.string.err_offline)
+    }
+
+    internal fun onSetOnline(success: Boolean) {
+        if (success) createCustomToast(this).showToast(R.string.succ_online) else createCustomToast(
+            this
+        ).showToastError(R.string.err_online)
     }
 
     private fun onCurrentAccountChange(newAccountId: Long) {

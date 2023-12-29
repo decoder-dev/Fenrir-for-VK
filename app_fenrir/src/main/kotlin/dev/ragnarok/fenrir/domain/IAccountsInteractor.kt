@@ -17,6 +17,7 @@ interface IAccountsInteractor {
     fun unbanOwner(accountId: Long, ownerId: Long): Completable
     fun changeStatus(accountId: Long, status: String?): Completable
     fun setOffline(accountId: Long): Single<Boolean>
+    fun setOnline(accountId: Long): Single<Boolean>
     fun getProfileInfo(accountId: Long): Single<VKApiProfileInfo>
     fun getPushSettings(accountId: Long): Single<List<ConversationPushItem>>
     fun saveProfileInfo(

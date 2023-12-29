@@ -25,6 +25,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:text="@string/fork_developer"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?colorPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:autoLink="web"
         android:gravity="center"
         android:padding="4dp"

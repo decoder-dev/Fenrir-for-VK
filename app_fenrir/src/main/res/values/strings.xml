@@ -229,6 +229,7 @@
         <item>Kate</item>
         <item>Hidden VK Android</item>
         <item>Hidden kate</item>
+        <item>VK iOS</item>
     </string-array>
 
     <string-array name="array_sex">
@@ -1561,6 +1562,7 @@
     <string name="lottie_preview">Lottie Preview</string>
     <string name="open_clipboard_url">Open link in clipboard</string>
     <string name="set_offline">Send offline request</string>
+    <string name="set_online">Send online request</string>
     <string name="scan_qr">Scan QR</string>
     <string name="empty_clipboard_url">The clipboard does not contain a link</string>
     <string name="empty_url">Empty link</string>
@@ -1572,6 +1574,8 @@
     <string name="pages">Pages</string>
     <string name="succ_offline">You have become offline</string>
     <string name="err_offline">Error, you\'re online!</string>
+    <string name="succ_online">You have become online</string>
+    <string name="err_online">Error, you\'re offline!</string>
     <string name="user_readed_yor_message">Has read your message</string>
     <string name="user_readed_yor_message_woman">Has read your message</string>
     <string name="user_readed_yor_message_man">Has read your message</string>

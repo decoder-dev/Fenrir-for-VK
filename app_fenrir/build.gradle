@@ -90,14 +90,14 @@ android {
     flavorDimensions.add("type")
     productFlavors {
         fenrir {
-            applicationId = "dev.ragnarok.fenrir"
+            applicationId = "com.vk.Fenrir"
             dimension = "type"
             buildConfigField("int", "VK_API_APP_ID", vk_app_id)
             buildConfigField("int", "DEFAULT_ACCOUNT_TYPE", "1") //VK_ANDROID
             buildConfigField("String", "VK_CLIENT_SECRET", asStringVar(vk_client_secret))
         }
         kate {
-            applicationId = "dev.ragnarok.fenrir_kate"
+            applicationId = "com.kate.Fenrir"
             dimension = "type"
             buildConfigField("int", "VK_API_APP_ID", kate_app_id)
             buildConfigField("int", "DEFAULT_ACCOUNT_TYPE", "3") //KATE

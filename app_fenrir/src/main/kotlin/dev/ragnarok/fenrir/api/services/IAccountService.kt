@@ -98,6 +98,9 @@ class IAccountService : IServiceRest() {
     val setOffline: Single<BaseResponse<Int>>
         get() = rest.request("account.setOffline", null, baseInt)
 
+    val setOnline: Single<BaseResponse<Int>>
+        get() = rest.request("account.setOnline", null, baseInt)
+
     val profileInfo: Single<BaseResponse<VKApiProfileInfo>>
         get() = rest.request("account.getProfileInfo", null, base(VKApiProfileInfo.serializer()))
 

@@ -611,9 +611,10 @@ class AccountsFragment : BaseMvpFragment<AccountsPresenter, IAccountsView>(), IA
                                 AccountType.VK_ANDROID,
                                 AccountType.KATE,
                                 AccountType.VK_ANDROID_HIDDEN,
-                                AccountType.KATE_HIDDEN
+                                AccountType.KATE_HIDDEN,
+                                AccountType.iOS
                             )
-                            if (access_token.isNotEmpty() && selected >= 0 && selected <= 3) {
+                            if (access_token.isNotEmpty() && selected >= 0 && selected <= 4) {
                                 presenter?.processAccountByAccessToken(
                                     access_token,
                                     types[selected]

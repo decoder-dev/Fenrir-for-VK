@@ -116,6 +116,12 @@ class AccountsInteractor(
             .setOffline()
     }
 
+    override fun setOnline(accountId: Long): Single<Boolean> {
+        return networker.vkDefault(accountId)
+            .account()
+            .setOnline()
+    }
+
     override fun getProfileInfo(accountId: Long): Single<VKApiProfileInfo> {
         return networker.vkDefault(accountId)
             .account()

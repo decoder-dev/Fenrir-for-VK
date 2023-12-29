@@ -39,6 +39,9 @@ interface IAccountApi {
     @CheckResult
     fun setOffline(): Single<Boolean>
 
+    @CheckResult
+    fun setOnline(): Single<Boolean>
+
     @get:CheckResult
     val profileInfo: Single<VKApiProfileInfo>
 

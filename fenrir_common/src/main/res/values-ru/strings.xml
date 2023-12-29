@@ -30,10 +30,11 @@
     </string-array>
 
     <!-- Google Play-->
-    <string name="developer">Разработчик: Умеров Артём</string>
-    <string name="first_pagan">Первый языческий</string>
-    <string name="repo">Репозиторий: https://github.com/umerov1999/Fenrir-for-VK</string>
-    <string name="repo_local_server">Репозиторий: https://github.com/umerov1999/FenrirMediaServer/releases</string>
+    <string name="developer">Разраб оригинала: Умеров Артём</string>
+    <string name="fork_developer">Разраб этого форка: decoder-dev</string>
+    <string name="first_pagan">TEST</string>
+    <string name="repo">Репозиторий: https://github.com/decoder-dev/Fenrir-VK</string>
+    <string name="repo_local_server">Репозиторий: NONE</string>
 
     <string name="enabled_local_server">Включен</string>
     <string name="reboot_pc_win">Перезапуск Win</string>

@@ -7,8 +7,8 @@ buildscript {
     ext.appNdk = "26.0.10792818"
     ext.appMinSDK = is_developer_build ? 29 : 21
     ext.appTargetSDK = 31
-    ext.appFenrirVersionCode = 999
-    ext.appFenrirVersionName = "2.999"
+    ext.appFenrirVersionCode = 3128
+    ext.appFenrirVersionName = "test"
     ext.appFileGalleryVersionCode = 999
     ext.appFileGalleryVersionName = "1.999"
 
@@ -71,6 +71,8 @@ buildscript {
     ext.targetAbi = is_developer_build ? ["arm64-v8a", "x86_64"] : ["arm64-v8a", "armeabi-v7a", "x86_64"]
     ext.vk_app_id = "2274003"
     ext.vk_client_secret = "hHbZxrka2uZ6jB1inYsH"
+    ext.vk_app_ios_id = "3140623"
+    ext.vk_client_ios_secret = "VeWdmVclDCtn6ihuP1nt"
     ext.kate_app_id = "2685278"
     ext.kate_client_secret = "lxhD8OD7dMsqtXIm5IUY"
     ext.vk_service_token = "7915b3df7915b3df7915b3dfd9794b73c0779157915b3df20c283430d77571be482c8b3"
@@ -89,7 +91,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:8.2.0-beta05"
+        classpath 'com.android.tools.build:gradle:8.2.0'
         classpath "com.google.gms:google-services:4.4.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"

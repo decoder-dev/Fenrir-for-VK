@@ -75,6 +75,7 @@
         <item>Kate</item>
         <item>Утоены VK Android</item>
         <item>Утоены Kate</item>
+        <item>VK iOS</item>
     </string-array>
 
     <string-array name="array_sex">
@@ -1322,6 +1323,7 @@
     <string name="uploaded">Загружана:</string>
     <string name="has_tags">Змяшчае адзнакі</string>
     <string name="pages">Старонкі</string>
+    <string name="set_online">Стаць Online</string>
     <string name="succ_offline">Вы сталі афлайн</string>
     <string name="err_offline">Памылка, вы анлайн!</string>
     <string name="user_readed_yor_message">Прачытаў(ла) ваша паведамленне</string>
@@ -1724,4 +1726,6 @@
     <string name="select_more">Выбраць больш…</string>
     <string name="chat_popup_menu">Кантэкстнае меню ў чаце</string>
     <string name="reactions">Рэакцыі</string>
+    <string name="succ_online">Вы сталі анлайн</string>
+    <string name="err_online">Памылка, вы афлайн!</string>
 </resources>

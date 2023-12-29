@@ -2,3 +2,5 @@
 .gradle
 .idea
 local.properties
+/app_fenrir/fenrir/release/app_fenrir-fenrir-release.apk
+/app_fenrir/fenrir/release/output-metadata.json

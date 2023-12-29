@@ -8,9 +8,11 @@ import dev.ragnarok.fenrir.util.Utils
 import java.util.Locale
 
 object UserAgentTool {
-    private inline fun <reified T> byDefaultAccountType(vk_official: T, kate: T): T {
+    private inline fun <reified T> byDefaultAccountType(vk_official: T, vk_ios: T, kate: T): T {
         return if (Constants.DEFAULT_ACCOUNT_TYPE == AccountType.VK_ANDROID) {
             vk_official
+        } else if (Constants.DEFAULT_ACCOUNT_TYPE == AccountType.iOS) {
+            vk_ios
         } else kate
     }
 
@@ -67,6 +69,10 @@ object UserAgentTool {
         Constants.DEVICE_COUNTRY_CODE,
         SCREEN_RESOLUTION
     )
+    private val VK_iOS_USER_AGENT = String.format(
+        Locale.US,
+        "com.vk.vkclient/3893 (iPhone, iOS 16.1, iPhone11,8, Scale/2.0)"
+    )
 
     fun getAccountUserAgent(@AccountType type: Int, device: String?): String {
         if (type == AccountType.VK_ANDROID_HIDDEN || type == AccountType.KATE_HIDDEN) {
@@ -101,7 +107,8 @@ object UserAgentTool {
             AccountType.VK_ANDROID_HIDDEN -> VK_ANDROID_USER_AGENT_FAKE
             AccountType.KATE -> KATE_USER_AGENT
             AccountType.KATE_HIDDEN -> KATE_USER_AGENT_FAKE
-            else -> byDefaultAccountType(VK_ANDROID_USER_AGENT, KATE_USER_AGENT)
+            AccountType.iOS -> VK_iOS_USER_AGENT
+            else -> byDefaultAccountType(VK_ANDROID_USER_AGENT, VK_iOS_USER_AGENT, KATE_USER_AGENT)
         }
     }
 
@@ -117,6 +124,7 @@ object UserAgentTool {
             if (it == ISettings.IAccountsSettings.INVALID_ID) {
                 byDefaultAccountType(
                     VK_ANDROID_USER_AGENT,
+                    VK_iOS_USER_AGENT,
                     KATE_USER_AGENT
                 )
             } else getAccountUserAgent(
@@ -130,7 +138,8 @@ object UserAgentTool {
             AccountType.VK_ANDROID_HIDDEN -> VK_ANDROID_USER_AGENT_FAKE
             AccountType.KATE -> KATE_USER_AGENT
             AccountType.KATE_HIDDEN -> KATE_USER_AGENT_FAKE
-            else -> byDefaultAccountType(VK_ANDROID_USER_AGENT, KATE_USER_AGENT)
+            AccountType.iOS -> VK_iOS_USER_AGENT
+            else -> byDefaultAccountType(VK_ANDROID_USER_AGENT, VK_iOS_USER_AGENT, KATE_USER_AGENT)
         }
     }
 }

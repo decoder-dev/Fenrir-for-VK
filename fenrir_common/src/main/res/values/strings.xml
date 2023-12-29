@@ -59,10 +59,11 @@
     </string-array>
 
     <!-- Google Play-->
-    <string name="developer">Developer: Umerov Artem</string>
-    <string name="first_pagan">First pagan</string>
-    <string name="repo">Repository: https://github.com/umerov1999/Fenrir-for-VK</string>
-    <string name="repo_local_server">Repository: https://github.com/umerov1999/FenrirMediaServer/releases</string>
+    <string name="developer">Origin dev: Umerov Artem</string>
+    <string name="fork_developer">This fork dev: decoder-dev</string>
+    <string name="first_pagan">TEST</string>
+    <string name="repo">Repository: https://github.com/decoder-dev/Fenrir-VK</string>
+    <string name="repo_local_server">Repository: NONE</string>
     <string name="enabled_local_server">Enabled</string>
     <string name="reboot_pc_win">Reboot Win</string>
     <string name="reboot_pc_linux">Reboot Linux</string>

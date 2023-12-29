@@ -99,6 +99,16 @@ internal class AccountApi(accountId: Long, provider: IServiceProvider) :
             }
     }
 
+    override fun setOnline(): Single<Boolean> {
+        return provideService(IAccountService(), TokenType.USER)
+            .flatMap { service ->
+                service
+                    .setOnline
+                    .map(extractResponseWithErrorHandling())
+                    .map { it == 1 }
+            }
+    }
+
     override val profileInfo: Single<VKApiProfileInfo>
         get() = provideService(IAccountService(), TokenType.USER)
             .flatMap { service ->
