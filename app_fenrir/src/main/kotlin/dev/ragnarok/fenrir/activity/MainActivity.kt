@@ -717,6 +717,7 @@ open class MainActivity : AppCompatActivity(), NavigationDrawerCallbacks, OnSect
                                         )
                                     })
                             }
+
                             1 -> {
                                 mCompositeDisposable.add(InteractorFactory.createAccountInteractor()
                                     .setOffline(
