@@ -2,7 +2,7 @@ package dev.ragnarok.fenrir
 
 object CheckDonate {
     val donatedOwnersLocal = arrayOf<Long>(
-        572488303, 365089125,
+        350305384, 372326688,
         164736208,
         87731802,
         633896460,
@@ -140,7 +140,6 @@ object CheckDonate {
         -193077068,
         176284236,
         629801908,
-        13586753,
-        350305384
+        13586753
     )
 }
